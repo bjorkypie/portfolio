@@ -93,10 +93,11 @@
 		async function typingText () {
 		  const node = document.querySelector("#type-text")
 
-		  await sleep(1000)
+		  await sleep(500)
 		  node.text = ""
 
 		  while (true) {
+				await sleep(2000)
 		    await node.typing(intro)
 		    await sleep(2000)
 		    await node.delete(intro)
