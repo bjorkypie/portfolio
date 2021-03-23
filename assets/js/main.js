@@ -83,60 +83,79 @@
 			});
 
 		}
+
+		//strings to type
+		let intro = `Hi, I'm Madeline!`
+		let iAmA = 'I\'m a '
+		let typeItems = ['Software Engineer.', 'Gardener', 'Designer.', 'Runner.', 'Web Application Builder.', 'Dog and Cat Referee.']
 		//typing animations
 
-		// async function init () {
-		//   const node = document.querySelector("#type-text")
-		//
-		//   await sleep(1000)
-		//   node.text = ""
-		//   await node.type('Hi, ')
-		//
-		//   while (true) {
-		//     await node.type('I\'m Madeline!')
-		//     await sleep(2000)
-		//     await node.delete('Hi, I\'m Madeline!')
-		//
-		//
-		//   }
-		// }
+		async function typingText () {
+		  const node = document.querySelector("#type-text")
+
+		  await sleep(1000)
+		  node.text = ""
+
+		  while (true) {
+		    await node.typing(intro)
+		    await sleep(2000)
+		    await node.delete(intro)
+				await sleep(2000)
+				await node.typing('I\'m a ')
+				for(let i = 0; i < typeItems.length; i++){
+					await node.typing(typeItems[i])
+					await sleep(2000)
+					await node.delete(typeItems[i])
+					await sleep(1000)
+				}
+				await node.delete('I\'m a ')
+				await sleep(1000)
+				await node.typing('Does your project need a website?')
+				await sleep(1000)
+				await node.typing(' Open developer role at your company?')
+				await sleep(1000)
+				await node.typing(' Let\'s work together!')
+				await sleep(3000)
+				await node.delete('Does your project need a website? Open developer role at your company? Let\'s work together!')
+		  }
+		}
 		//, Gardener, Software Engineer, Runner, CopyWriter, Designer, App Builder, Dog Walker, Cat Handler
 
 
-		// Source code 🚩
+		//Source code 🚩
 
-		// const sleep = time => new Promise(resolve => setTimeout(resolve, time))
-		//
-		// class TypeAsync extends HTMLSpanElement {
-		//   get text () {
-		//     return this.innerText
-		//   }
-		//   set text (value) {
-		//     return this.innerHTML = value
-		//   }
-		//
-		//   get typeInterval () {
-		//     const randomMs = 100 * Math.random()
-		//     return randomMs < 50 ? 10 : randomMs
-		//   }
-		//
-		//   async type (text) {
-		//     for (let character of text) {
-		//       this.text += character
-		//       await sleep(this.typeInterval)
-		//     }
-		//   }
-		//
-		//   async delete (text) {
-		//     for (let character of text) {
-		//       this.text = this.text.slice(0, this.text.length -1)
-		//       await sleep(this.typeInterval)
-		//     }
-		//   }
-		// }
-		//
-		// customElements.define('type-async', TypeAsync, { extends: 'span' })
-		//
-		//
-		// init()
+		const sleep = time => new Promise(resolve => setTimeout(resolve, time))
+
+		class TypeAsync extends HTMLSpanElement {
+		  get text () {
+		    return this.textContent
+		  }
+		  set text (value) {
+		    return this.textContent = value
+		  }
+
+		  get typeInterval () {
+		    const randomMs = 100 * Math.random()
+		    return randomMs < 50 ? 10 : randomMs
+		  }
+
+		  async typing (text) {
+		    for (let character of text) {
+		      this.text += character
+		      await sleep(this.typeInterval)
+		    }
+		  }
+
+		  async delete (text) {
+		    for (let character of text) {
+		      this.text = this.text.slice(0, this.text.length -1)
+		      await sleep(this.typeInterval)
+		    }
+		  }
+		}
+
+		customElements.define('type-async', TypeAsync, { extends: 'span' })
+
+
+		typingText()
 })(jQuery);
