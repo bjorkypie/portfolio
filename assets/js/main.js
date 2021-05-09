@@ -87,7 +87,7 @@
 		//strings to type
 		let intro = `Hi, I'm Madeline!`
 		let iAmA = 'I\'m a '
-		let typeItems = ['Software Engineer.', 'Gardener', 'Designer.', 'Runner.', 'Web Application Builder.', 'Dog and Cat Referee.']
+		let typeItems = ['Software Engineer.', 'Gardener.', 'Designer.', 'Runner.', 'Web Application Builder.', 'Dog and Cat Referee.']
 		//typing animations
 
 		async function typingText () {
